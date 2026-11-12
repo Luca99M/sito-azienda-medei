@@ -146,10 +146,12 @@ h3.titolo,h4.titolo{font-size:clamp(26px,2.600vw,38px)!important}
 .riga{display:flex;gap:clamp(30px,6vw,100px);align-items:center}
 .riga.inversa{flex-direction:row-reverse}
 .riga>.col{flex:1 1 0;min-width:0}
-.riga.n2>.col>.foto,.riga.n2>.col>.cornice,.riga.n2>.col>a>.foto{border-radius:var(--arco);aspect-ratio:4/5;object-fit:cover;max-height:78vh}
+.riga.n2>.col>.foto,.riga.n2>.col>.cornice,.riga.n2>.col>a>.foto{border-radius:28px;aspect-ratio:4/5;object-fit:cover;max-height:78vh}
+.sez:nth-of-type(odd) .riga.n2>.col>.foto,.sez:nth-of-type(odd) .riga.n2>.col>.cornice{border-radius:28px 28px 180px 28px;aspect-ratio:1}
+.sez:nth-of-type(3n) .riga.n2>.col>.foto,.sez:nth-of-type(3n) .riga.n2>.col>.cornice{border-radius:180px 28px 28px 28px;aspect-ratio:5/4}
 .riga.n2>.col>.cornice>.foto{aspect-ratio:auto;border-radius:0;height:100%}
 .riga.n3,.riga.n4{align-items:flex-start;gap:clamp(20px,3vw,44px)}
-.riga.n3 .foto,.riga.n4 .foto{border-radius:var(--arco);aspect-ratio:3/4;object-fit:cover;margin-bottom:18px}
+.riga.n3 .foto,.riga.n4 .foto{border-radius:22px;aspect-ratio:1;object-fit:cover;margin-bottom:18px}
 .riga .riga{gap:30px}
 
 /* blocchi colorati */
@@ -196,14 +198,15 @@ h3.titolo,h4.titolo{font-size:clamp(26px,2.600vw,38px)!important}
 .schede-tasti button[aria-selected=true],.schede-tasti button:hover{background:var(--inchiostro);color:var(--oro)}
 .scheda{display:grid;grid-template-columns:5fr 6fr;gap:clamp(30px,6vw,90px);align-items:center}
 .scheda[hidden]{display:none}
-.scheda>.foto,.scheda>.cornice{aspect-ratio:4/5;object-fit:cover;border-radius:var(--arco);max-height:70vh}
+.scheda>.foto,.scheda>.cornice{aspect-ratio:5/4;object-fit:cover;border-radius:160px 28px 160px 28px;max-height:70vh}
 .scheda .testo p:first-child strong{font-family:var(--display);font-style:italic;font-weight:450;font-size:clamp(40px,5vw,72px);line-height:1;text-transform:capitalize;display:block}
 
 /* scorrimento orizzontale */
 .scorri{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;padding:6px 2px 20px;scrollbar-width:thin;overscroll-behavior-x:contain}
 .galleria{gap:14px;padding:0 var(--lato) 20px}
 .galleria img{flex:none;width:clamp(260px,30vw,480px);aspect-ratio:4/5;object-fit:cover;border-radius:22px;scroll-snap-align:start}
-.galleria img:nth-child(even){border-radius:var(--arco);margin-top:40px}
+.galleria img:nth-child(even){aspect-ratio:1;margin-top:40px}
+.galleria img:nth-child(3n){aspect-ratio:3/4;margin-top:16px}
 
 /* recensioni */
 .rec-voto{font-size:19px;margin-bottom:22px}
@@ -217,8 +220,10 @@ h3.titolo,h4.titolo{font-size:clamp(26px,2.600vw,38px)!important}
 /* prodotti */
 .prodotti-lista{display:grid;gap:22px;max-width:1040px}
 .prodotto{display:grid;grid-template-columns:minmax(150px,280px) 1fr;gap:clamp(20px,4vw,50px);align-items:center;background:#fff;padding:22px;border-radius:30px;color:var(--inchiostro)}
-.prodotto .p-foto{border-radius:var(--arco);overflow:hidden}
-.prodotto .p-foto img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.prodotto .p-foto{border-radius:50%;overflow:hidden}
+.prodotto.compatto .p-foto{border-radius:20px}
+.prodotto.compatto .p-foto img{aspect-ratio:4/5}
+.prodotto .p-foto img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
 .prodotto:hover .p-foto img{transform:scale(1.05)}
 .prodotto h3{font-size:clamp(28px,3vw,42px)}
 .prodotto .descr{font-size:17px;line-height:1.6;max-width:34em}
@@ -395,8 +400,10 @@ select,input{font:inherit;font-size:17px;padding:10px 12px;border:1.500px solid 
   .testo{font-size:17px}
   .azione .btn{display:block;width:100%;padding:17px 20px}
   .riga,.riga.inversa{gap:22px}
-  .riga.n2>.col>.foto,.riga.n2>.col>.cornice{aspect-ratio:5/4;border-radius:22px}
-  .scheda>.foto,.scheda>.cornice{aspect-ratio:5/4;border-radius:22px}
+  .sez .riga.n2>.col>.foto,.sez .riga.n2>.col>.cornice{aspect-ratio:5/4!important;border-radius:22px}
+  .sez:nth-of-type(odd) .riga.n2>.col>.foto,.sez:nth-of-type(odd) .riga.n2>.col>.cornice{border-radius:22px 22px 90px 22px}
+  .sez:nth-of-type(3n) .riga.n2>.col>.foto,.sez:nth-of-type(3n) .riga.n2>.col>.cornice{border-radius:90px 22px 22px 22px}
+  .scheda>.foto,.scheda>.cornice{aspect-ratio:5/4;border-radius:90px 22px 90px 22px}
   .schede-tasti{flex-wrap:nowrap;gap:6px;margin-bottom:24px}
   .schede-tasti button{flex:1;padding:12px 6px;font-size:15.500px}
   .filmato,.yt,.mappa{border-radius:18px}
@@ -407,7 +414,7 @@ select,input{font:inherit;font-size:17px;padding:10px 12px;border:1.500px solid 
   .recensione{width:78vw;padding:20px;border-radius:22px}
   .recensione blockquote{font-size:16px;-webkit-line-clamp:7}
   .galleria{margin:0;padding:0 20px 14px}
-  .galleria img{width:66vw;border-radius:18px!important;margin-top:0!important}
+  .galleria img{width:66vw;border-radius:18px!important;margin-top:0!important;aspect-ratio:4/5!important}
 
   /* schede prodotto: foto piccola accanto al nome, pulsanti a tutta larghezza */
   .prodotto{display:grid;grid-template-columns:92px 1fr;gap:6px 16px;padding:16px;border-radius:24px;align-items:center}
