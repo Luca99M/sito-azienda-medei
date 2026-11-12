@@ -146,16 +146,32 @@
 
   /* preventivo */
   var pv = $('#preventivo');
+  var CHIAVE = 'medei-carrello';
+  function leggi() { try { return JSON.parse(localStorage.getItem(CHIAVE)) || {}; } catch (e) { return {}; } }
+  function salva(c) { try { localStorage.setItem(CHIAVE, JSON.stringify(c)); } catch (e) {} }
+  function distintivo() {
+    var c = leggi(), n = 0, tot = 0;
+    Object.keys(c).forEach(function (id) { var v = voce(id); if (v && c[id] > 0) { n += c[id]; tot += v.prezzo * c[id]; } });
+    var bb = $('#bb-tot'), hd = $('#hd-carrello');
+    if (bb) bb.textContent = n ? euro(tot) : '';
+    if (hd) { hd.hidden = !n; $('b', hd).textContent = n ? n + ' · ' + euro(tot) : ''; }
+  }
+  if (pv) {
+    var iniziale = leggi();
+    $$('tr[data-voce]', pv).forEach(function (tr) { var q = iniziale[tr.dataset.voce]; if (q > 0) $('input', tr).value = q; });
+  }
   function calcola() {
     if (!pv) return;
     var interno = pv.hasAttribute('data-interno');
-    var righe = [], sub = 0;
+    var righe = [], sub = 0, stato = {};
     $$('tr[data-voce]', pv).forEach(function (tr) {
       var v = voce(tr.dataset.voce), inp = $('input', tr);
       var q = Math.max(0, Math.min(999, parseInt(inp.value, 10) || 0));
       tr.classList.toggle('scelto', q > 0);
-      if (v && q > 0) { righe.push({ v: v, q: q }); sub += v.prezzo * q; }
+      if (v && q > 0) { righe.push({ v: v, q: q }); sub += v.prezzo * q; stato[v.id] = q; }
     });
+    salva(stato);
+    distintivo();
     var zid = $('#pv-zona').value, zona = null;
     D.spedizioni.forEach(function (z) { if (z.id === zid) zona = z; });
     var sconto = 0;
@@ -221,19 +237,33 @@
         });
       }
     });
-    /* "Aggiungi al preventivo" dalle schede prodotto */
-    document.addEventListener('click', function (ev) {
-      var b = ev.target.closest('[data-aggiungi]');
-      if (!b) return;
-      var v = sceltaCard(b.closest('.prodotto'));
-      var tr = v && $('tr[data-voce="' + v.id + '"]', pv);
-      if (!tr) return;
-      var inp = $('input', tr);
-      inp.value = (parseInt(inp.value, 10) || 0) + 1;
-      calcola();
-      pv.scrollIntoView({ behavior: fermo ? 'auto' : 'smooth' });
-    });
+    /* svuota il preventivo */
+    var rie = $('.pv-riepilogo', pv);
+    if (rie) {
+      var sv = document.createElement('button');
+      sv.type = 'button'; sv.className = 'pv-svuota'; sv.textContent = en ? 'Empty the quote' : 'Svuota il preventivo';
+      rie.appendChild(sv);
+      sv.addEventListener('click', function () { $$('tr[data-voce] input', pv).forEach(function (i) { i.value = 0; }); calcola(); });
+    }
   }
+
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-aggiungi]');
+    if (!b) return;
+    var v = sceltaCard(b.closest('.prodotto'));
+    if (!v) return;
+    var tr = pv && $('tr[data-voce="' + v.id + '"]', pv);
+    if (tr) { var inp = $('input', tr); inp.value = (parseInt(inp.value, 10) || 0) + 1; calcola(); }
+    else { var c = leggi(); c[v.id] = (c[v.id] || 0) + 1; salva(c); distintivo(); }
+    var testo = b.dataset.testo || (b.dataset.testo = b.textContent);
+    b.textContent = en ? 'Added ✓' : 'Aggiunto ✓';
+    b.classList.add('aggiunto');
+    clearTimeout(b._t);
+    b._t = setTimeout(function () { b.textContent = testo; b.classList.remove('aggiunto'); }, 1400);
+    var live = $('#annuncio');
+    if (live) live.textContent = (en ? 'Added to the quote: ' : 'Aggiunto al preventivo: ') + etichetta(v);
+  });
+  window.addEventListener('pageshow', distintivo);
 
   /* prezzi da Google Sheet (facoltativo): due fogli pubblicati come CSV */
   function csv(t) {
@@ -266,7 +296,8 @@
         D.spedizioni.forEach(function (z) { if (z.id === r.id && p !== null) z.costo = p; });
       });
     })
-  ]).then(function () { aggiornaPrezzi(); calcola(); });
+  ]).then(function () { aggiornaPrezzi(); calcola(); distintivo(); });
   aggiornaPrezzi();
   calcola();
+  distintivo();
 })();

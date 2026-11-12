@@ -6,13 +6,6 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
 
-  /* barra in basso (telefono): mostra il totale del preventivo */
-  var tot = $('#pv-tot'), bb = $('#bb-tot');
-  if (tot && bb && window.MutationObserver) {
-    new MutationObserver(function () { var t = tot.textContent.trim(); bb.textContent = /\d/.test(t) ? t.replace(' +', '') : ''; })
-      .observe(tot, { childList: true, characterData: true, subtree: true });
-  }
-
   if (!window.gsap || !window.ScrollTrigger || fermo) {
     radice.classList.remove('js');
     return;
