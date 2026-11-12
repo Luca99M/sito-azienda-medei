@@ -1,0 +1,9 @@
+﻿id,zona,costo
+ritiro,Ritiro in sede (Coste di Trevi),0.00
+umbria,Umbria,7.00
+italia,"Italia (Sicilia compresa, Sardegna esclusa)",13.00
+sardegna,Sardegna,16.00
+eu1,"Austria, Germania",14.00
+eu2,"Belgio, Francia, Paesi Bassi, Polonia, Slovacchia",20.00
+eu3,"Portogallo, Danimarca, Spagna, Ungheria",24.00
+eu4,"Grecia, Svezia, Estonia, Lituania, Lettonia, Croazia",32.00

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /preventivo-interno/
+
+Sitemap: https://aziendamedei.com/sitemap.xml

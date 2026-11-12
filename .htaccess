@@ -1,0 +1,41 @@
+# Redirect 301 dal vecchio sito WordPress (hosting Apache/Plesk)
+ErrorDocument 404 /404.html
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteRule ^olio\-2/?$ /olio-trevi-umbria/ [L,R=301]
+RewriteRule ^olio\-biologico\-evo/?$ /olio-trevi-umbria/ [L,R=301]
+RewriteRule ^formaggi/?$ /pecorino-italiano/ [L,R=301]
+RewriteRule ^noci/?$ /noci-italiane/ [L,R=301]
+RewriteRule ^en/cheese/?$ /en/cheese-pecorino/ [L,R=301]
+RewriteRule ^en/shop_/?$ /en/shop/ [L,R=301]
+RewriteRule ^en/?$ /en/azienda-medei/ [L,R=301]
+RewriteRule ^prodotto/olio/?$ /olio-trevi-umbria/ [L,R=301]
+RewriteRule ^prodotto/formaggio\-fresco\-di\-pecora/?$ /pecorino-italiano/ [L,R=301]
+RewriteRule ^prodotto/formaggio\-stagionato\-di\-pecora/?$ /pecorino-italiano/ [L,R=301]
+RewriteRule ^prodotto/noci/?$ /noci-italiane/ [L,R=301]
+RewriteRule ^prodotto/miele/?$ /shop/ [L,R=301]
+RewriteRule ^prodotto/miele\-1\-kg/?$ /shop/ [L,R=301]
+RewriteRule ^prodotto/lenticchie/?$ /shop/ [L,R=301]
+RewriteRule ^negozio/?$ /shop/ [L,R=301]
+RewriteRule ^carrello/?$ /shop/ [L,R=301]
+RewriteRule ^pagamento/?$ /shop/ [L,R=301]
+RewriteRule ^mio\-account/?$ /shop/ [L,R=301]
+RewriteRule ^elementor\-3248/?$ /olio-trevi-umbria/ [L,R=301]
+RewriteRule ^elementor\-3305/?$ /vendita-di-legna-da-ardere-a-trevi-foligno/ [L,R=301]
+RewriteRule ^games/?$ / [L,R=301]
+RewriteRule ^home/?$ / [L,R=301]
+RewriteRule ^nonno\-virtuale/?$ https://nonno-andrea-azienda-medei.vercel.app/ [L,R=301]
+RewriteRule ^prodotto(/.*)?$ /shop/ [L,R=301]
+RewriteRule ^categoria\-prodotto(/.*)?$ /shop/ [L,R=301]
+RewriteRule ^mio\-account(/.*)?$ /shop/ [L,R=301]
+RewriteRule ^wp\-admin(/.*)?$ / [L,R=301]
+RewriteRule ^wp\-login\.php(/.*)?$ / [L,R=301]
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/webp "access plus 1 month"
+ExpiresByType font/woff2 "access plus 1 year"
+ExpiresByType video/mp4 "access plus 1 month"
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

@@ -1,0 +1,41 @@
+SITO AZIENDA MEDEI - VERSIONE 2.0 (design nuovo, animazioni GSAP + Lenis)
+=====================================================
+
+Questa cartella contiene il sito completo, pronto da pubblicare.
+Non serve WordPress: sono solo file.
+
+VEDERE IL SITO SUL COMPUTER
+  Apri index.html con un doppio clic. Mappa e video YouTube si vedono solo online.
+
+CAMBIARE UN PREZZO O UNA SPEDIZIONE
+  1. Apri dati/prezzario.js con il Blocco note.
+  2. Cambia il numero dopo "prezzo" (prodotti) o "costo" (spedizioni). Decimali con il punto: 7.50
+  3. Salva e ricarica il file sul sito.
+  Il prezzo cambia in tutte le pagine, nel calcolatore e nella pagina interna.
+
+  Con Google Sheet (facoltativo):
+  1. Importa in un Google Sheet i file dati/prezzario-prodotti.csv e dati/prezzario-spedizioni.csv
+     (un foglio per ciascuno). Non cambiare la colonna "id".
+  2. File > Condividi > Pubblica sul web > scegli il foglio > formato CSV > Pubblica.
+  3. Incolla i due link in dati/prezzario.js, alla voce "foglio": "prodotti" e "spedizioni".
+  Da quel momento basta cambiare i prezzi nel foglio.
+
+CAMBIARE IL NUMERO WHATSAPP
+  In dati/prezzario.js, voce "whatsapp" (prefisso 39, senza + e senza spazi).
+  Il pulsante verde fisso in basso usa lo stesso numero scritto nelle pagine:
+  per cambiarlo ovunque chiedi a Claude di rigenerare il sito.
+
+PAGINA INTERNA
+  /preventivo-interno/  -  calcolatore con sconto e nome cliente, per fare tutti le stesse cifre.
+  Non compare su Google e non ha link dal menu, ma non ha password:
+  chi conosce l'indirizzo la può aprire.
+
+PUBBLICARE
+  Hosting attuale (Plesk/Apache): carica tutto il contenuto di questa cartella in httpdocs
+  al posto di WordPress. Il file .htaccess contiene i redirect 301 dai vecchi indirizzi.
+  Firebase Hosting: firebase.json contiene gli stessi redirect; comando "firebase deploy".
+
+DOPO LA PUBBLICAZIONE
+  - Search Console: invia https://aziendamedei.com/sitemap.xml
+  - Controlla che i vecchi indirizzi (es. /prodotto/olio/, /negozio/) portino alle nuove pagine.
+  - Tieni il backup di WordPress per qualche mese.
