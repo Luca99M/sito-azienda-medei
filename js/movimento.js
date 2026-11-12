@@ -6,6 +6,13 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
 
+  /* barra in basso (telefono): mostra il totale del preventivo */
+  var tot = $('#pv-tot'), bb = $('#bb-tot');
+  if (tot && bb && window.MutationObserver) {
+    new MutationObserver(function () { var t = tot.textContent.trim(); bb.textContent = /\d/.test(t) ? t.replace(' +', '') : ''; })
+      .observe(tot, { childList: true, characterData: true, subtree: true });
+  }
+
   if (!window.gsap || !window.ScrollTrigger || fermo) {
     radice.classList.remove('js');
     return;
@@ -14,6 +21,7 @@
   gsap.registerPlugin(ScrollTrigger);
   if (window.SplitText) gsap.registerPlugin(SplitText);
   var EASE = 'expo.out';
+  var telefono = window.matchMedia('(max-width: 820px)').matches;
 
   /* scorrimento fluido */
   var lenis = null;
@@ -52,16 +60,16 @@
     if (eroe) {
       var tl = gsap.timeline({ defaults: { ease: EASE } });
       gsap.set('.eroe-logo, .eroe-titolo, .eroe-sotto, .eroe-azioni', { visibility: 'visible' });
-      var lettere = window.SplitText ? SplitText.create('.eroe-titolo span', { type: 'chars', mask: 'chars' }) : null;
+      var lettere = window.SplitText ? SplitText.create('.eroe-titolo span', telefono ? { type: 'lines', mask: 'lines' } : { type: 'chars', mask: 'chars' }) : null;
       tl.from('.eroe-foto img', { scale: 1.25, duration: 2.4, ease: 'power3.out' }, 0);
       tl.from('.eroe-logo', { scale: 0.6, autoAlpha: 0, y: 30, duration: 1.4, transformOrigin: 'left bottom' }, 0.05);
-      if (lettere) tl.from(lettere.chars, { yPercent: 110, duration: 1.3, stagger: 0.035 }, 0.35);
+      if (lettere) tl.from(telefono ? lettere.lines : lettere.chars, { yPercent: 110, duration: 1.3, stagger: 0.035 }, 0.35);
       else tl.from('.eroe-titolo span', { yPercent: 40, autoAlpha: 0, duration: 1.2, stagger: 0.12 }, 0.15);
       tl.from('.eroe-sotto', { y: 30, autoAlpha: 0, duration: 1.1 }, 0.8)
         .from('.eroe-azioni .btn', { y: 24, autoAlpha: 0, duration: 0.9, stagger: 0.1 }, 0.95)
-        .from('.testata', { yPercent: -200, duration: 1.1 }, 0.5);
+        .from('.testata', { yPercent: -200, duration: 1.1, clearProps: 'transform' }, 0.5);
       gsap.to('.eroe-foto img', { yPercent: 18, ease: 'none', scrollTrigger: { trigger: eroe, start: 'top top', end: 'bottom top', scrub: true } });
-      gsap.to('.eroe-testo', { yPercent: -22, autoAlpha: 0.2, ease: 'none', scrollTrigger: { trigger: eroe, start: 'top top', end: 'bottom top', scrub: true } });
+      if (!telefono) gsap.to('.eroe-testo', { yPercent: -22, autoAlpha: 0.2, ease: 'none', scrollTrigger: { trigger: eroe, start: 'top top', end: 'bottom top', scrub: true } });
     }
     $$('.copertina').forEach(function (c) {
       var w = $('.wrap', c);
@@ -143,12 +151,12 @@
       c.appendChild(a);
       gsap.fromTo(c, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: EASE,
         scrollTrigger: { trigger: c, start: 'top 85%', once: true }, onComplete: function () { c.style.clipPath = ''; } });
-      gsap.fromTo(im, { yPercent: -7, scale: 1.16 }, { yPercent: 7, scale: 1.16, ease: 'none',
+      if (!telefono) gsap.fromTo(im, { yPercent: -7, scale: 1.16 }, { yPercent: 7, scale: 1.16, ease: 'none',
         scrollTrigger: { trigger: c, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 
     /* --- gallerie e strisce: scivolano di lato mentre scendi --- */
-    $$('.galleria').forEach(function (g) {
+    if (!telefono) $$('.galleria').forEach(function (g) {
       gsap.fromTo(g, { x: 60 }, { x: -120, ease: 'none', scrollTrigger: { trigger: g, start: 'top bottom', end: 'bottom top', scrub: 0.5 } });
     });
 

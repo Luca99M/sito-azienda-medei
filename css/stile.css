@@ -30,7 +30,7 @@ main{overflow-x:clip}
 .testata{position:fixed;top:14px;left:0;right:0;z-index:40;padding:0 14px}
 .barra{transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 .testata.nascosta .barra{transform:translateY(-160%)}
-.barra{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;background:rgba(247,248,240,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;padding:7px 9px 7px 22px;box-shadow:0 1px 0 rgba(28,36,22,.08),0 12px 30px -18px rgba(28,36,22,.5)}
+.barra{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;background:rgba(247,248,240,.96);border-radius:999px;padding:7px 9px 7px 22px;box-shadow:0 1px 0 rgba(28,36,22,.08),0 12px 30px -18px rgba(28,36,22,.5)}
 .logo img{width:62px;mix-blend-mode:multiply;border-radius:12px}
 .barra nav{flex:1}
 .menu{display:flex;justify-content:center;gap:clamp(12px,2vw,30px);list-style:none;margin:0;padding:0;font-size:15.500px;font-weight:550}
@@ -329,4 +329,120 @@ select,input{font:inherit;font-size:17px;padding:10px 12px;border:1.500px solid 
 }
 @media (max-width:520px){.riga.n4>.col{flex:none!important}}
 @media (prefers-reduced-motion:reduce){.eroe-scorri::after{animation:none}.testata,.btn,.arco img,.prodotto .p-foto img{transition:none}html:not(.js) .nastro-binario{animation:none}}
+.barra-bassa{display:none}
+
+/* ================= TELEFONO: il sito è pensato prima di tutto per qui ================= */
+@media (max-width:820px){
+  body{font-size:17px;padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+  .wrap{padding:0 20px}
+  .sez{padding:48px 0}
+  .sez.colore+.sez,.sez.scuro+.sez,.sez.su-foto+.sez,.sez+.sez.colore,.sez+.sez.scuro,.sez+.sez.su-foto,.sez+.sez.preventivo,.cinema+.sez,.copertina+.sez{padding-top:48px}
+  .testata{top:10px;padding:0 10px}
+  .barra{padding:6px 6px 6px 14px}
+  .logo img{width:50px}
+  .menu{inset:0;top:0;left:0;width:auto;height:auto;padding:110px 24px 110px}
+  .wa-fisso{display:none}
+  .copy{padding-bottom:28px}
+
+  /* barra in basso: le tre azioni che servono, sempre a portata di pollice */
+  .barra-bassa{display:grid;grid-template-columns:1fr 1.25fr 1.25fr;gap:6px;position:fixed;left:0;right:0;bottom:0;z-index:35;background:rgba(28,36,22,.97);padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+  .barra-bassa a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;border-radius:999px;font-weight:650;font-size:15px;text-decoration:none;color:var(--carta);white-space:nowrap}
+  .barra-bassa a:nth-child(2){background:var(--oro);color:var(--inchiostro)}
+  .barra-bassa .bb-wa{background:#167d40;color:#fff}
+  .barra-bassa svg{width:20px;height:20px;fill:#fff}
+  #bb-tot:not(:empty){font-weight:750;margin-left:2px}
+  #bb-tot:not(:empty)::before{content:"· "}
+
+  /* copertina: logo, nome e due pulsanti grandi, tutto centrato */
+  .eroe{min-height:calc(100svh - 64px);align-items:flex-end}
+  .eroe-foto img{object-position:38% 50%}
+  .eroe-foto::after{background:linear-gradient(180deg,rgba(28,36,22,.15) 0%,rgba(28,36,22,.1) 30%,rgba(28,36,22,.9) 78%)}
+  .eroe-testo{padding:110px 20px 30px;text-align:center}
+  .eroe-logo{width:112px;margin:0 auto 18px}
+  .eroe-titolo{font-size:clamp(46px,15vw,84px);line-height:.95;margin:0 0 16px;text-wrap:balance;white-space:normal}
+  .eroe-titolo .riga-b{padding-left:0}
+  .eroe-sotto{font-size:19px;line-height:1.35;margin:0 auto 22px;max-width:19em}
+  .eroe-azioni{flex-direction:column;gap:10px}
+  .eroe-azioni .btn{width:100%;padding:17px 20px;font-size:17px}
+  .copertina{min-height:72svh;padding:120px 0 34px}
+  .copertina h1{font-size:clamp(44px,14vw,80px)!important}
+
+  .nastro{padding:13px 0}
+  .presenta{padding:54px 0 46px}
+  .presenta-testo{font-size:22px;line-height:1.32}
+  .numeri{grid-template-columns:repeat(3,1fr);gap:10px;margin-top:34px;padding-top:20px}
+  .numero-voce .numero{font-size:clamp(25px,8.200vw,40px)}
+  .numero-voce .etichetta{font-size:13.500px;line-height:1.3;margin-top:4px}
+  .contatore .numero{font-size:44px}
+
+  /* prodotti: elenco verticale, una riga per prodotto, tutta toccabile */
+  .corsia{padding:50px 0 44px}
+  .corsia-testa{margin-bottom:22px}
+  .corsia-binario{display:block;width:auto;overflow:visible;padding:0 20px}
+  .pannello{position:relative;width:auto;display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:center;padding:16px 0;border-top:1px solid rgba(247,248,240,.2)}
+  .pannello .arco{aspect-ratio:3/4;pointer-events:none}
+  .pannello h3{font-size:36px;margin-bottom:4px}
+  .pannello p{font-size:15.500px;line-height:1.45;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .freccia{font-size:15px;background:none;color:var(--oro);padding:0}
+  .freccia::after{content:"";position:absolute;inset:0}
+  .pannello-fine{display:block;padding:22px 0 0;border-top:1px solid rgba(247,248,240,.2)}
+  .btn.grande-tondo{width:100%;aspect-ratio:auto;border-radius:999px;font-family:var(--testo);font-style:normal;font-weight:650;font-size:17px;padding:17px 20px;display:block}
+  .cinema{height:62svh;min-height:380px}
+
+  .duo{font-size:clamp(34px,10.500vw,52px)}
+  .titolo{font-size:clamp(28px,8vw,40px)!important}
+  .sez.su-foto .titolo{font-size:clamp(38px,11vw,56px)!important}
+  .testo{font-size:17px}
+  .azione .btn{display:block;width:100%;padding:17px 20px}
+  .riga,.riga.inversa{gap:22px}
+  .riga.n2>.col>.foto,.riga.n2>.col>.cornice{aspect-ratio:5/4;border-radius:22px}
+  .scheda>.foto,.scheda>.cornice{aspect-ratio:5/4;border-radius:22px}
+  .schede-tasti{flex-wrap:nowrap;gap:6px;margin-bottom:24px}
+  .schede-tasti button{flex:1;padding:12px 6px;font-size:15.500px}
+  .filmato,.yt,.mappa{border-radius:18px}
+  .mappa{height:300px}
+
+  .scorri{gap:12px;margin:0 -20px;padding:4px 20px 14px;scroll-padding-left:20px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .scorri::-webkit-scrollbar{display:none}
+  .recensione{width:78vw;padding:20px;border-radius:22px}
+  .recensione blockquote{font-size:16px;-webkit-line-clamp:7}
+  .galleria{margin:0;padding:0 20px 14px}
+  .galleria img{width:66vw;border-radius:18px!important;margin-top:0!important}
+
+  /* schede prodotto: foto piccola accanto al nome, pulsanti a tutta larghezza */
+  .prodotto{display:grid;grid-template-columns:92px 1fr;gap:6px 16px;padding:16px;border-radius:24px;align-items:center}
+  .prodotto .p-foto{max-width:none;grid-row:1}
+  .prodotto .p-foto img{aspect-ratio:1}
+  .prodotto .p-testo{display:contents}
+  .prodotto h3{font-size:25px;margin:0;grid-column:2;grid-row:1;align-self:center}
+  .prodotto .descr,.prodotto .prezzo,.prodotto .formato,.prodotto .p-azioni{grid-column:1/-1}
+  .prodotto .descr{font-size:15.500px;margin:8px 0 6px}
+  .prodotto .prezzo{font-size:26px;margin:0 0 8px}
+  .prodotto .formato select{display:block;width:100%;margin-top:4px}
+  .p-azioni{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .p-azioni .btn{padding:14px 6px;font-size:14.500px}
+  .prodotto.compatto{width:66vw;display:flex;padding:12px}
+  .prodotto.compatto .p-testo{display:flex}
+  .prodotto.compatto .p-azioni{grid-template-columns:1fr}
+
+  /* preventivo: una voce per riga, tasti grandi */
+  .pv-tabella{padding:4px 14px;border-radius:22px;overflow:visible}
+  .pv-tabella thead{display:none}
+  .pv-tabella table,.pv-tabella tbody{display:block}
+  .pv-tabella tr{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;padding:12px 0;border-bottom:1px solid #ecefe2}
+  .pv-tabella tr:last-child{border-bottom:0}
+  .pv-tabella th,.pv-tabella td{padding:0;border:0}
+  .pv-tabella tbody th{grid-column:1;grid-row:1;font-size:16px;font-weight:600;line-height:1.3}
+  .pv-tabella .c-prezzo{grid-column:1;grid-row:2;font-size:15px;color:#56524c}
+  .pv-tabella .c-q{grid-column:2;grid-row:1/3}
+  .pv-tabella tr.scelto{background:none}
+  .pv-tabella tr.scelto th{color:#0f5c2e}
+  .passo button{width:46px;height:46px}
+  .passo input{width:40px;font-size:18px}
+  .pv-riepilogo{padding:20px;border-radius:22px}
+  .pv-tot{font-size:30px}
+  .elenco{font-size:17px}
+  .sez.scuro .riga{gap:26px}
+}
+@media (max-width:820px) and (max-height:700px){.eroe-logo{width:78px;margin-bottom:10px}.eroe-testo{padding-top:84px;padding-bottom:20px}.eroe-sotto{font-size:17px;margin-bottom:14px}.eroe-azioni .btn{padding:14px 20px}}
 @media print{.testata,.wa-fisso,.eroe-foto,.cinema,.nastro{display:none}}
