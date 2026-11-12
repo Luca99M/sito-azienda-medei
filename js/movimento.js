@@ -113,10 +113,6 @@
         var dist = function () { return Math.max(0, b.scrollWidth - window.innerWidth); };
         var tw = gsap.to(b, { x: function () { return -dist(); }, ease: 'none',
           scrollTrigger: { trigger: c, start: 'center center', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1 } });
-        $$('.arco img', c).forEach(function (im) {
-          gsap.fromTo(im, { xPercent: -8, scale: 1.15 }, { xPercent: 8, scale: 1.15, ease: 'none',
-            scrollTrigger: { trigger: im, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } });
-        });
       });
       /* finestra video: l'arco si apre fino a tutto schermo */
       $$('.cinema').forEach(function (c) {
@@ -151,8 +147,6 @@
       c.appendChild(a);
       gsap.fromTo(c, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: EASE,
         scrollTrigger: { trigger: c, start: 'top 85%', once: true }, onComplete: function () { c.style.clipPath = ''; } });
-      if (!telefono) gsap.fromTo(im, { yPercent: -7, scale: 1.16 }, { yPercent: 7, scale: 1.16, ease: 'none',
-        scrollTrigger: { trigger: c, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 
     /* --- gallerie e strisce: scivolano di lato mentre scendi --- */

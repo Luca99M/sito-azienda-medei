@@ -451,5 +451,31 @@ select,input{font:inherit;font-size:17px;padding:10px 12px;border:1.500px solid 
   .elenco{font-size:17px}
   .sez.scuro .riga{gap:26px}
 }
+/* ===== foto intere e centrate: nessun ritaglio sui prodotti, proporzioni originali ===== */
+.arco{border-radius:28px;aspect-ratio:1;background:none}
+.arco img{object-position:center}
+.sez .riga.n2>.col>.foto,.sez .riga.n2>.col>.cornice,.sez .riga.n2>.col>a>.foto{aspect-ratio:auto!important;max-height:none;height:auto;border-radius:28px}
+.sez:nth-of-type(odd) .riga.n2>.col>.foto,.sez:nth-of-type(odd) .riga.n2>.col>.cornice{border-radius:28px 28px 96px 28px}
+.sez:nth-of-type(3n) .riga.n2>.col>.foto,.sez:nth-of-type(3n) .riga.n2>.col>.cornice{border-radius:96px 28px 28px 28px}
+.cornice>.foto,.cornice>a>.foto{aspect-ratio:auto!important;height:auto!important;border-radius:0!important;display:block}
+.riga.n3 .foto,.riga.n4 .foto{aspect-ratio:auto}
+.scheda>.foto,.scheda>.cornice{aspect-ratio:auto!important;max-height:none;border-radius:96px 28px 96px 28px}
+.galleria{align-items:center}
+.galleria img,.galleria img:nth-child(even),.galleria img:nth-child(3n){width:auto!important;height:clamp(240px,30vw,400px);aspect-ratio:auto!important;margin-top:0!important;border-radius:22px!important;object-fit:contain}
+.galleria img:nth-child(even){height:clamp(200px,24vw,320px)}
+.prodotto .p-foto{border-radius:20px}
+.prodotto .p-foto img,.prodotto.compatto .p-foto img{aspect-ratio:2/3;object-fit:cover;object-position:center}
+.prodotto{grid-template-columns:minmax(120px,200px) 1fr}
+@media (max-width:820px){
+  .pannello{grid-template-columns:112px 1fr}
+  .pannello .arco{aspect-ratio:1;border-radius:18px}
+  .sez .riga.n2>.col>.foto,.sez .riga.n2>.col>.cornice{border-radius:22px!important}
+  .scheda>.foto,.scheda>.cornice{border-radius:22px!important}
+  .prodotto{grid-template-columns:84px 1fr}
+  .prodotto .p-foto{border-radius:14px}
+  .prodotto .p-foto img{aspect-ratio:2/3}
+  .prodotto.compatto .p-foto{border-radius:16px}
+  .galleria img,.galleria img:nth-child(even),.galleria img:nth-child(3n){height:230px}
+}
 @media (max-width:820px) and (max-height:700px){.eroe-logo{width:78px;margin-bottom:10px}.eroe-testo{padding-top:84px;padding-bottom:20px}.eroe-sotto{font-size:17px;margin-bottom:14px}.eroe-azioni .btn{padding:14px 20px}}
 @media print{.testata,.wa-fisso,.eroe-foto,.cinema,.nastro{display:none}}
